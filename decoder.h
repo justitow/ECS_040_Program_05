@@ -11,6 +11,7 @@ class Decoder
   char opcode[20];
   int *operand1;
   int *operand2;
+
   void addl(Registers *registers);
   void andl(Registers *registers);
   void call(Registers *registers, int memory[1001]) const;
