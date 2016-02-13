@@ -6,6 +6,7 @@
 #include "reader.h"
 #include "instruction.h"
 #include "labels.h"
+#include "data.h"
 using namespace std;
 
 

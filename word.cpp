@@ -9,10 +9,25 @@
 #include "word.h"
 using namespace std;
 
-class Word
+Word::Word(int myAdr) : address(myAdr)
 {
 	
-private:
-	int address;
+}
 
-};
+Word::~Word()
+{
+	
+}
+
+bool operator<(Word& l, Word& r)
+{
+	if ()
+		return true;
+	else
+		return false;
+}
+
+Word::getAdress()
+{
+	return address;
+}
