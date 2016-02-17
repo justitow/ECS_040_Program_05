@@ -30,8 +30,3 @@ bool operator<(const Word& l, const Word& r)
 		return false;
 	}
 }
-
-const int Word::getAdress() const
-{
-	return address;
-}

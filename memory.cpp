@@ -16,6 +16,23 @@ ListNode::ListNode(Word* myword, ListNode* listnode)
 	next = listnode;
 }
 
+ListNode::~ListNode()
+{
+	delete word;
+}
+
+Memory::~Memory()
+{
+	ListNode* node = head;
+	while (node->next != NULL)
+	{
+		node = node->next;
+		ListNode* prev = node;
+		delete prev;
+	}
+
+}
+
 Word& Memory::operator[](int adr)
 {
 	ListNode* node = head;
@@ -70,7 +87,7 @@ void Memory::insert(Word* word)
 		ListNode* node = head;
 		ListNode* prev = node;
 
-		if ((head != NULL) && (head->next != NULL))
+		if ((head != NULL) && ((*head).next != NULL))
 		{
 			if (*word < *(head->word))
 			{

@@ -8,12 +8,7 @@
 
 #include "data.h"
 
-Data::Data(int address) : Word(address)
-{
-	
-}
-
-Data::~Data()
+Data::Data(int adr) : Word(adr)
 {
 	
 }
