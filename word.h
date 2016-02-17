@@ -24,4 +24,4 @@ public:
 	const int getAdress() const; // DELETE BEFORE YOU GO GO
 }; // class Word
 
-#endif /* word_h */
+#endif 

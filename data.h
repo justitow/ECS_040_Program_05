@@ -26,4 +26,4 @@ public:
 	int& operator=(int newNum);
 };
 
-#endif /* data_h */
+#endif 
