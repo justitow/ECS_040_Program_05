@@ -21,7 +21,7 @@ public:
 	Word(int myAdr);
 	~Word();
 	friend bool operator<(const Word& l, const Word& R);
-	int getAdress(); // DELETE BEFORE YOU GO GO
+	const int getAdress() const; // DELETE BEFORE YOU GO GO
 }; // class Word
 
 #endif /* word_h */

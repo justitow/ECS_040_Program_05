@@ -21,13 +21,13 @@ Word::~Word()
 
 bool operator<(Word& l, Word& r)
 {
-	if ()
+	if (&l < &r)
 		return true;
 	else
 		return false;
 }
 
-Word::getAdress()
+const int Word::getAdress() const
 {
 	return address;
 }

@@ -7,6 +7,8 @@
 #include "instruction.h"
 #include "labels.h"
 #include "data.h"
+#include "memory.h"
+
 using namespace std;
 
 

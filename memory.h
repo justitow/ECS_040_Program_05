@@ -9,6 +9,40 @@
 #ifndef memory_h
 #define memory_h
 
-#include <stdio.h>
+#include <iostream>
 
-#endif /* memory_h */
+#include "word.h"
+#include "data.h"
+
+using namespace std;
+
+class Memory;
+
+class ListNode
+{
+	friend class Memory;
+private:
+	ListNode* next;
+	Word* word;
+public:
+	ListNode(Word* word, ListNode* listnode);
+	~ListNode();
+	
+};
+
+
+class Memory
+{
+private:
+	ListNode* head;
+public:
+	void insert(Word* word);
+	Word& operator[](const int adr);
+	Word& operator[](const int adr) const;
+	
+};
+
+
+
+
+#endif 
