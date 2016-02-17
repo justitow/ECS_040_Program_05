@@ -64,51 +64,9 @@ Word& Memory::operator[](const int adr) const
 
 void Memory::insert(Word* word)
 {
+	
 
-	if (head != NULL)
-	{
-		ListNode* node = head;
-		ListNode* prev = node;
-
-		if (node->next != NULL)
-		{
-			if (*word < *node->word)
-			{
-				head = new ListNode(word, head); //hit
-			}
-			else
-			{
-				while (*node->word < *word)
-				{
-					prev = node; //hit
-					node = node->next;
-				} // while
-				
-				prev->next = new ListNode(word, node);
-			}
-		} // if
-
-		else
-		{
-
-			if (*word < *node->word)
-			{
-				head = new ListNode(word, head); //hit
-			} // if
-
-			else
-			{
-				head->next = new ListNode(word, NULL);
-			} // else
-		} //else
-	} // if
-	else
-	{
-		head = new ListNode(word, NULL); //hit
-	} // else
-
-} //insert()
-
+} //insert
 const Instruction& Memory::fetch(Registers *registers) const
 {
 	Instruction& instruction = dynamic_cast<Instruction&>((*this)[registers->get(Registers::eip)]);
