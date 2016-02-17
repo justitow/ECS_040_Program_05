@@ -14,10 +14,10 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-  Reader reader;
+  //Reader reader;
   Decoder decoder;
   Registers registers;
-  Instruction instruction;
+  //Instruction instruction;
   Labels labels;
 	Memory memory;
 	Data* data = new Data(1000);
@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
 	*data = 0;
 	memory.insert(data);
   ifstream inf(argv[1]);
-  inf >> reader;
+  inf >> memory;
   inf.clear();
   inf.seekg(0);
   inf >> labels;
@@ -35,10 +35,10 @@ int main(int argc, char* argv[])
   
   while(registers.get(Registers::eip) != 0)
   {
-    reader.fetch(&instruction, &registers);
-    decoder.parse(&instruction, &registers, memory, labels);
-    decoder.execute(&instruction, &registers, memory);
-    cout << left << setw(20) << instruction.getInfo() << registers;
+		const Instruction&  instruction = memory.fetch(&registers);
+    decoder.parse(instruction, &registers, memory, labels);
+    decoder.execute(instruction, &registers, memory);
+    cout << left << setw(20) << instruction << registers;
   } // while eip not zero
   
  

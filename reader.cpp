@@ -11,7 +11,7 @@ void Reader::fetch(Instruction *instruction, Registers *registers) const
 {
   int pos;
   
-  for(pos = 0; lines[pos].getAddress() != registers->get(Registers::eip); 
+  for(pos = 0; lines[pos].getAddress() != registers->get(Registers::eip);
     pos++);
   
   instruction->setInfo(lines[pos].getInfo());

@@ -29,9 +29,9 @@ class Decoder
   void sall(Registers *registers);
   void subl(Registers *registers);
 public:
-  void execute(const Instruction *instruction, Registers *registers, 
+  void execute(const Instruction &instruction, Registers *registers,
                Memory &memory);
-  void parse(const Instruction *instruction, Registers *registers, 
+  void parse(const Instruction &instruction, Registers *registers,
              Memory &memory, const Labels &labels);
 }; // class Decoder;
 

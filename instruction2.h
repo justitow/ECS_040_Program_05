@@ -9,7 +9,18 @@
 #ifndef instruction2_h
 #define instruction2_h
 
-#include <iostream>
-using namespace std;
+class Instruction2
+{
+	int address;
+	char *info;
+public:
+	Instruction2();
+	~Instruction2();
+	int getAddress() const;
+	const char* getInfo() const;
+	void setAddress(int addr);
+	void setInfo(const char* information);
+	
+}; //class Instruction
 
-#endif 
+#endif

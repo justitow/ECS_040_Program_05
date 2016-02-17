@@ -2,12 +2,12 @@
 #define	LABELS_H
 
 #include <iostream>
-#include "instruction.h"
+#include "instruction2.h"
 using namespace std;
 
 class Labels 
 {
-  Instruction addresses[100];
+  Instruction2 addresses[100];
   int count;
 public:
   Labels();

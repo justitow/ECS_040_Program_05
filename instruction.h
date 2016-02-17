@@ -2,17 +2,17 @@
 #define	INSTRUCTION_H
 // Author: Sean Davis
 
-class Instruction
+#include "word.h"
+
+class Instruction : public Word
 {
-  int address;
   char *info;
 public:
-  Instruction();
-  ~Instruction();
-  int getAddress() const;
+  Instruction(int adr);
+  virtual ~Instruction();
   const char* getInfo() const;
-  void setAddress(int addr);
-  void setInfo(const char* information);
+  char& operator=(const char* information);
+	friend ostream& operator<<(ostream&, Instruction&);
   
 }; //class Instruction
 

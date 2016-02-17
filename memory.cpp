@@ -107,3 +107,14 @@ void Memory::insert(Word* word)
 
 } //insert()
 
+void Instruction::fetch(Registers *registers) const
+{
+	int pos;
+	
+	for(pos = 0; lines[pos].getAddress() != registers->get(Registers::eip);
+			pos++);
+	
+	instruction->setInfo(lines[pos].getInfo());
+	registers->set(Registers::eip, registers->get(Registers::eip) + 4);
+} // fetch()
+

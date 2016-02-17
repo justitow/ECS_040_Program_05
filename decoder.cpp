@@ -36,7 +36,7 @@ void Decoder::cmpl(Registers *registers) const
 }  // cmpl()
 
 
-void Decoder::execute(const Instruction *instruction,
+void Decoder::execute(const Instruction &instruction,
                       Registers *registers, Memory& memory)
 {
   const char *opcodes[] = { "addl", "andl", "leave", "movl", "pushl", "ret",
@@ -65,7 +65,7 @@ void Decoder::execute(const Instruction *instruction,
     case JG: jg(registers); break;
     case JLE:  jle(registers); break;
     case JMP: jmp(registers); break;
-    case LEAL: leal(instruction, registers); break;
+    case LEAL: leal(&instruction, registers); break;
     case CALL: call(registers, memory); break;
     case SALL: sall(registers); break;
     default: cout << "Invalid opcode!\n";
@@ -125,12 +125,12 @@ void Decoder::movl()
 }  // movl()
 
 
-void Decoder::parse(const Instruction *instruction, Registers *registers, 
+void Decoder::parse(const Instruction &instruction, Registers *registers,
                     Memory& memory, const Labels &labels)
 {
   char *ptr, info[1000];
   
-  strcpy(info, instruction->getInfo());
+  strcpy(info, instruction.getInfo());
   strcpy(opcode, strtok(info, " "));
   ptr = strtok(NULL, " ");
   if(ptr)
