@@ -30,7 +30,6 @@ Memory::~Memory()
 		ListNode* prev = node;
 		delete prev;
 	}
-
 }
 
 Word& Memory::operator[](int adr)
@@ -82,48 +81,16 @@ Word& Memory::operator[](const int adr) const
 void Memory::insert(Word* word)
 {
 
-	if (head != NULL)
-	{
-		ListNode* node = head;
-		ListNode* prev = node;
-
-		if ((head != NULL) && ((*head).next != NULL))
-		{
-			if (*word < *(head->word))
-			{
-				head = new ListNode(word, head); //hit
-			}
+	ListNode *ptr, *prev = NULL;
+		
+	for (ptr = head; ptr && *ptr->word < *word; ptr = ptr->next)
+		prev = ptr;
+		
+	if(prev)
+		prev->next = new ListNode(word, ptr);
 			else
-			{
-				while (*(node->word) < *word)
-				{
-					prev = node; //hit
-					node = node->next;
-				} // while
-				
-				prev->next = new ListNode(word, node);
-			}
-		} // if
-
-		else
-		{
-
-			if (*word < *node->word)
-			{
-				head = new ListNode(word, head); //hit
-			} // if
-
-			else
-			{
-				head->next = new ListNode(word, NULL);
-			} // else
-		} //else
-	} // if
-	else
-	{
-		head = new ListNode(word, NULL); //hit
-	} // else
-
+				head = new ListNode(word, ptr);
+	
 } //insert()
 
 const Instruction& Memory::fetch(Registers *registers) const

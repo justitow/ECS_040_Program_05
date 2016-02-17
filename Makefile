@@ -29,4 +29,4 @@ memory.o : memory.cpp memory.h word.h data.h
 	g++ -ansi -Wall -g -c memory.cpp
 
 clean : 
-	rm -f CPU.out decoder.o  instruction.o  labels.o  main.o  reader.o  registers.o word.o data.o memory.o
+	rm -f CPU.out *.o

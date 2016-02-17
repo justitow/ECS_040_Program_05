@@ -12,7 +12,6 @@
 #include <iostream>
 #include "word.h"
 
-using namespace std;
 
 class Data : public Word
 {

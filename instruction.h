@@ -12,7 +12,7 @@ public:
   virtual ~Instruction();
   const char* getInfo() const;
   char operator=(const char* information);
-	friend ostream& operator<<(ostream&, const Instruction&);
+	friend std::ostream& operator<<(std::ostream&, const Instruction&);
   
 }; //class Instruction
 

@@ -4,6 +4,7 @@
 #include <cstring>
 
 
+using namespace std;
 
 Instruction::Instruction(int adr) : Word(adr), info(NULL)
 {
