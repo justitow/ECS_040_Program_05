@@ -70,7 +70,7 @@ void Memory::insert(Word* word)
 		ListNode* node = head;
 		ListNode* prev = node;
 
-		if ((head->next) != NULL)
+		if ((head != NULL) && (head->next != NULL))
 		{
 			if (*word < *(head->word))
 			{
