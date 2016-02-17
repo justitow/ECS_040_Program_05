@@ -3,7 +3,7 @@
 #include <iomanip>
 #include "registers.h"
 #include "decoder.h"
-#include "reader.h"
+//#include "reader.h"
 #include "instruction.h"
 #include "labels.h"
 #include "data.h"

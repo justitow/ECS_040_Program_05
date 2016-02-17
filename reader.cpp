@@ -1,3 +1,4 @@
+/*
 // Author: Sean Davis
 #include <iostream>
 #include <fstream>
@@ -7,7 +8,7 @@
 using namespace std;
 
 
-void Reader::fetch(Instruction *instruction, Registers *registers) const 
+void Reader::fetch(Instruction instruction, Registers *registers) const
 {
   int pos;
   
@@ -41,3 +42,4 @@ istream& operator>> (istream &is, Reader &reader)
   
   return is;
 }  // operator>>
+*/

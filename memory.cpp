@@ -7,6 +7,8 @@
 //
 
 #include "memory.h"
+#include "registers.h"
+
 
 ListNode::ListNode(Word* myword, ListNode* listnode)
 {
@@ -72,49 +74,61 @@ void Memory::insert(Word* word)
 		{
 			if (*word < *node->word)
 			{
-				head = new ListNode(word, head);
+				head = new ListNode(word, head); //hit
 			}
 			else
 			{
 				while (*node->word < *word)
 				{
-					prev = node;
+					prev = node; //hit
 					node = node->next;
 				} // while
-				
-				prev->next = new ListNode(word, node);
-			}
+
+				prev->next = new ListNode(word, node); //hit
+			} // else
 		} // if
 
 		else
 		{
-
-			if (*word < *node->word)
-			{
-				head = new ListNode(word, head);
-			} // if
-
-			else
-			{
-				head->next = new ListNode(word, NULL);
-			} // else
+			head = new ListNode(word, head); //hit
 		} //else
 	} // if
 	else
 	{
-		head = new ListNode(word, NULL);
+		head = new ListNode(word, NULL); //hit
 	} // else
 
 } //insert()
 
-void Instruction::fetch(Registers *registers) const
+const Instruction& Memory::fetch(Registers *registers) const
 {
-	int pos;
-	
-	for(pos = 0; lines[pos].getAddress() != registers->get(Registers::eip);
-			pos++);
-	
-	instruction->setInfo(lines[pos].getInfo());
+	Instruction& instruction = dynamic_cast<Instruction&>((*this)[registers->get(Registers::eip)]);
 	registers->set(Registers::eip, registers->get(Registers::eip) + 4);
+	return instruction;
 } // fetch()
+
+istream& operator>> (istream &is, Memory &memory)
+{
+	char line[256], *ptr;
+	int c_address = 100;
+	
+	while(is.getline(line, 256))
+	{
+		for(ptr = strchr(line, '\t'); ptr; ptr = strchr(line, '\t'))
+			*ptr = ' ';  // replace all tabs with space characters
+		
+		for(ptr = line; *ptr == ' '; ptr++);  // get past leading spaces
+		
+		if(*ptr != '.' && *ptr != '_' && !strstr(line, "main:"))
+		{
+			Instruction* instruction = new Instruction(c_address);
+			*instruction = line;
+			memory.insert(instruction);
+			c_address += 4;
+		} // if not directive, nor main:
+	}  // while more in file
+	
+	return is;
+}  // operator>>
+
 

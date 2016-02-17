@@ -25,27 +25,17 @@ const char* Instruction::getInfo() const
 
 
 
-char& Instruction::operator=(const char* information)
+char Instruction::operator=(const char* information)
 {
   info = new char[strlen(information) + 1];
-  strcpy(info, information);
+  strcpy(info, information+1);
 	return *info;
 } // setInfo()
 
-ostream& operator<<(ostream& output, Instruction& instruction)
+ostream& operator<<(ostream& output, const Instruction& instruction)
 {
-	output << instruction.getInfo();
+	output << instruction.info;
 	return output;
 }
 
-void Instruction::fetch(Registers *registers) const
-{
-	int pos;
-	
-	for(pos = 0; lines[pos].getAddress() != registers->get(Registers::eip);
-			pos++);
-	
-	instruction->setInfo(lines[pos].getInfo());
-	registers->set(Registers::eip, registers->get(Registers::eip) + 4);
-} // fetch()
 

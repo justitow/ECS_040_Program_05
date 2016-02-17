@@ -13,10 +13,12 @@
 
 #include "word.h"
 #include "data.h"
+#include "instruction.h"
 
 using namespace std;
 
 class Memory;
+class Registers;
 
 class ListNode
 {
@@ -27,6 +29,7 @@ private:
 public:
 	ListNode(Word* word, ListNode* listnode);
 	~ListNode();
+
 	
 };
 
@@ -39,7 +42,8 @@ public:
 	void insert(Word* word);
 	Word& operator[](const int adr);
 	Word& operator[](const int adr) const;
-	
+	const Instruction& fetch(Registers *registers) const;
+	friend istream& operator>> (istream &is, Memory &memory);
 };
 
 

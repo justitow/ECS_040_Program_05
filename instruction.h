@@ -11,8 +11,8 @@ public:
   Instruction(int adr);
   virtual ~Instruction();
   const char* getInfo() const;
-  char& operator=(const char* information);
-	friend ostream& operator<<(ostream&, Instruction&);
+  char operator=(const char* information);
+	friend ostream& operator<<(ostream&, const Instruction&);
   
 }; //class Instruction
 

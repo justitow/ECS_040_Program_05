@@ -1,3 +1,4 @@
+/*
 #ifndef READER_H
 #define	READER_H
 // Author: Sean Davis
@@ -18,3 +19,4 @@ public:
 
 #endif	// READER_H 
 
+*/
