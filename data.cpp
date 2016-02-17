@@ -13,14 +13,14 @@ Data::Data(int address) : Word(address)
 	
 }
 
-~Data()
+Data::~Data()
 {
 	
 }
 
 int& Data::get()
 {
-	return &num;
+	return num;
 }
 
 int Data::get() const
@@ -28,8 +28,8 @@ int Data::get() const
 	return num;
 }
 
-int& Data::operator=(const int& newInt)
+int& Data::operator=(int newInt)
 {
 	num = newInt;
-	return &num;
+	return num;
 }

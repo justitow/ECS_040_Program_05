@@ -19,8 +19,8 @@ private:
 	int address;
 public:
 	Word(int myAdr);
-	~Word();
-	friend bool operator<(const Word& l, const Word& R);
+	virtual ~Word();
+	friend bool operator<(const Word& L, const Word& R);
 	const int getAdress() const; // DELETE BEFORE YOU GO GO
 }; // class Word
 

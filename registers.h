@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "labels.h"
+#include "memory.h"
 using namespace std;
 
  
@@ -16,14 +17,14 @@ class Registers
 public:
   typedef enum {eax, ebp, esp, eip, edx, flags} RegName;
   Registers(); 
-  int* address(char *ptr, int memory[], const Labels &labels);
+  int* address(char *ptr, Memory &memory, const Labels &labels);
   int get(Registers::RegName regName) const;
   bool getSF() const;
   bool getZF() const;
  
   int operator+= (int change);
   friend ostream& operator<< (ostream &os, const Registers &registers);
-  int* scaledIndexMode(char *operand, int memory[]) const;
+  int* scaledIndexMode(char *operand, Memory &memory) const;
   void set(Registers::RegName regName, int value);
   void setFlags(int value);
 }; // class Registers

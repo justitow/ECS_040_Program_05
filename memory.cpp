@@ -8,33 +8,40 @@
 
 #include "memory.h"
 
-Word& Memory::operator[](const int adr)
+ListNode::ListNode(Word* myword, ListNode* listnode)
+{
+	word = myword;
+	next = listnode;
+}
+
+Word& Memory::operator[](int adr)
 {
 	ListNode* node = head;
-	Word* word(adr);
-	while (node->word < word)
+	Word* word = new Word(adr);
+	
+	if (node->word != NULL)
 	{
-		node = node->next;
-	} //while
+		while ((node != NULL) && (*node->word < *word))
+		{
+			node = node->next;
+		} //while
 
-	if (!(word < node->word))
-	{
-		return &node->word;
-	}// if not equal
+		if (!(*word < *node->word))
+		{
+			return *node->word;
+		}// if not equal
+	}
 
-	else
-	{
-		Data data = new Data(adr);
-		insert(data);
-		return &data;
-	} //else
+	Data* data = new Data(adr);
+	insert(data);
+	return *data;
 	
 }// operator[]
 
 Word& Memory::operator[](const int adr) const
 {
 	ListNode* node = head;
-	Word* word(adr);
+	Word* word = new Word(adr);
 	while (*node->word < *word)
 	{
 		node = node->next;
@@ -42,29 +49,61 @@ Word& Memory::operator[](const int adr) const
 	
 	if (!(*word < *node->word))
 	{
-		return &node->word;
+		return *node->word;
 	}// if not equal
 	
 	else
 	{
-		cout << "ya dun goofed";
+		//cout << "ya dun goofed";
+		return *node->word;
 	} // else
 
 }// operator[]
 
 void Memory::insert(Word* word)
 {
-	ListNode* node = head;
-	ListNode* prev = node;
 
-	while (*node->word < *word)
+	if (head != NULL)
 	{
-		prev = node;
-		node = node->next;
-	} //while ()
+		ListNode* node = head;
+		ListNode* prev = node;
 
-	ListNode* newNode = new ListNode(word, node);
-	prev->next = newNode;
+		if (node->next != NULL)
+		{
+			if (*word < *node->word)
+			{
+				head = new ListNode(word, head);
+			}
+			else
+			{
+				while (*node->word < *word)
+				{
+					prev = node;
+					node = node->next;
+				} // while
+				
+				prev->next = new ListNode(word, node);
+			}
+		} // if
+
+		else
+		{
+
+			if (*word < *node->word)
+			{
+				head = new ListNode(word, head);
+			} // if
+
+			else
+			{
+				head->next = new ListNode(word, NULL);
+			} // else
+		} //else
+	} // if
+	else
+	{
+		head = new ListNode(word, NULL);
+	} // else
 
 } //insert()
 

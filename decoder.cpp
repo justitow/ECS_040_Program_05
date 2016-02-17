@@ -21,9 +21,11 @@ void Decoder::andl(Registers *registers)
 }  // andl()
 
 
-void Decoder::call(Registers *registers, int memory[1001]) const
+void Decoder::call(Registers *registers, Memory& memory) const
 {
-  memory[*registers += -4] = registers->get(Registers::eip);
+	Data &data = dynamic_cast <Data&> (memory[*registers += -4]);
+	data.get() = registers->get(Registers::eip);
+	
   registers->set(Registers::eip, *operand1);
 } // call()
 
@@ -35,7 +37,7 @@ void Decoder::cmpl(Registers *registers) const
 
 
 void Decoder::execute(const Instruction *instruction,
-                      Registers *registers, int memory[1001])
+                      Registers *registers, Memory& memory)
 {
   const char *opcodes[] = { "addl", "andl", "leave", "movl", "pushl", "ret",
     "subl", "cmpl", "incl", "jg", "jle", "jmp", "leal", "call", "sall"};
@@ -108,10 +110,11 @@ void Decoder::leal(const Instruction *instruction, const Registers *registers)
 }  // leal()
 
 
-void Decoder::leave(Registers *registers, const int memory[1001]) const
+void Decoder::leave(Registers *registers, const Memory& memory) const
 {
+	Data &data = dynamic_cast <Data&> (memory[registers->get(Registers::esp)]);
   registers->set(Registers::esp, registers->get(Registers::ebp));
-  registers->set(Registers::ebp, memory[registers->get(Registers::esp)]);
+  registers->set(Registers::ebp, data.get());
   registers->set(Registers::esp, registers->get(Registers::esp) + 4);
 }  // leave()
 
@@ -123,14 +126,13 @@ void Decoder::movl()
 
 
 void Decoder::parse(const Instruction *instruction, Registers *registers, 
-                    int memory[1001], const Labels &labels)
+                    Memory& memory, const Labels &labels)
 {
   char *ptr, info[1000];
   
   strcpy(info, instruction->getInfo());
   strcpy(opcode, strtok(info, " "));
   ptr = strtok(NULL, " ");
-  
   if(ptr)
   {
     operand1 = registers->address(ptr, memory, labels);
@@ -145,17 +147,21 @@ void Decoder::parse(const Instruction *instruction, Registers *registers,
 
 
 
-void Decoder::pushl(Registers *registers, int memory[1001]) const
+void Decoder::pushl(Registers *registers, Memory& memory) const
 {
-  memory[*registers += -4] = *operand1;
+	Data &data = dynamic_cast <Data&> (memory[*registers += -4]);
+	
+	data.get() = *operand1;
 }  // pushl()
 
 
 
 
-void Decoder::ret(Registers *registers, const int memory[1001]) const
+void Decoder::ret(Registers *registers, const Memory& memory) const
 {
-  registers->set(Registers::eip, memory[registers->get(Registers::esp)]);
+
+	Data &data = dynamic_cast <Data&> (memory[registers->get(Registers::esp)]);
+  registers->set(Registers::eip, data.get());
   *registers += 4;
 }  // ret()
 

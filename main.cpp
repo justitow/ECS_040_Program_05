@@ -19,8 +19,13 @@ int main(int argc, char* argv[])
   Registers registers;
   Instruction instruction;
   Labels labels;
-  int memory [1001];
-  memory[1000] = 0;
+	Memory memory;
+	Data* data = new Data(1000);
+	*data = 0;
+	memory.insert(data);
+	data = new Data(992);
+	*data = 0;
+	memory.insert(data);
   ifstream inf(argv[1]);
   inf >> reader;
   inf.clear();

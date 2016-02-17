@@ -23,7 +23,7 @@ public:
 	~Data();
 	int& get();
 	int get() const;
-	int& operator=(const int& newNum);
+	int& operator=(int newNum);
 };
 
 #endif /* data_h */

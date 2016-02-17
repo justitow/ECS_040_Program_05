@@ -19,12 +19,16 @@ Word::~Word()
 	
 }
 
-bool operator<(Word& l, Word& r)
+bool operator<(const Word& l, const Word& r)
 {
-	if (&l < &r)
+	if (l.address < r.address)
+	{
 		return true;
+	}
 	else
+	{
 		return false;
+	}
 }
 
 const int Word::getAdress() const

@@ -17,7 +17,7 @@ Registers::Registers()
 }  // Registers()
 
 
-int* Registers::address(char *operand, int memory[], const Labels &labels)
+int* Registers::address(char *operand, Memory& memory, const Labels &labels)
 {
   static int value;
  
@@ -49,7 +49,8 @@ int* Registers::address(char *operand, int memory[], const Labels &labels)
   {
     *ptr = '\0';  // terminate operand string at first '('
     index = atoi(operand);  // will return 0 if no number there!
-    return  &memory[regs[regNum] + index];
+		Data& data = dynamic_cast<Data&> (memory[regs[regNum] + index]);
+		return &data.get();
   } // if ptr
   else  // direct addressing
     return &(regs[regNum]);
@@ -97,7 +98,7 @@ ostream& operator<< (ostream &os, const Registers &registers)
 }  // operator<<()
 
 
-int* Registers::scaledIndexMode(char *operand, int memory[]) const
+int* Registers::scaledIndexMode(char *operand, Memory& memory) const
 {
   int offset, regNum1, regNum2, size;
   char *ptr = operand, *ptr2;
@@ -122,7 +123,10 @@ int* Registers::scaledIndexMode(char *operand, int memory[]) const
   *ptr = '\0';
   regNum2 = stringToRegNum(ptr2);
   size = atoi(++ptr);
-  return &memory[regs[regNum1] + size * regs[regNum2] + offset];
+  //return &memory[regs[regNum1] + size * regs[regNum2] + offset];
+	Data& data = dynamic_cast<Data&> (memory[regs[regNum1]
+																					 + size * regs[regNum2] + offset]);
+	return &data.get();
 } // scaledIndexMode()
 
 
