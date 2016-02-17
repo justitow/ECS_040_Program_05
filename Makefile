@@ -1,7 +1,7 @@
-CPU.out : decoder.o instruction.o labels.o main.o reader.o registers.o  
-	g++ -ansi -Wall -g -o CPU.out decoder.o instruction.o labels.o main.o reader.o registers.o  
+CPU.out : decoder.o instruction.o labels.o main.o reader.o registers.o word.o data.o memory.o
+	g++ -ansi -Wall -g -o CPU.out decoder.o instruction.o labels.o main.o reader.o registers.o word.o data.o memory.o
 
-decoder.o : decoder.cpp decoder.h instruction.h registers.h 
+decoder.o : decoder.cpp decoder.h instruction.h registers.h labels.h memory.h
 	g++ -ansi -Wall -g -c decoder.cpp
 
 instruction.o : instruction.cpp instruction.h 
@@ -10,7 +10,7 @@ instruction.o : instruction.cpp instruction.h
 labels.o : labels.cpp labels.h 
 	g++ -ansi -Wall -g -c labels.cpp
 
-main.o : main.cpp registers.h decoder.h reader.h instruction.h labels.h 
+main.o : main.cpp registers.h decoder.h reader.h instruction.h labels.h data.h memory.h
 	g++ -ansi -Wall -g -c main.cpp
 
 reader.o : reader.cpp reader.h registers.h 
@@ -29,4 +29,4 @@ memory.o : memory.cpp memory.h word.h data.h
 	g++ -ansi -Wall -g -c memory.cpp
 
 clean : 
-	rm -f CPU.out decoder.o  instruction.o  labels.o  main.o  reader.o  registers.o   
+	rm -f CPU.out decoder.o  instruction.o  labels.o  main.o  reader.o  registers.o word.o data.o memory.o
