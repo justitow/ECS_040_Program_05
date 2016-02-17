@@ -83,14 +83,23 @@ void Memory::insert(Word* word)
 					prev = node; //hit
 					node = node->next;
 				} // while
-
-				prev->next = new ListNode(word, node); //hit
-			} // else
+				
+				prev->next = new ListNode(word, node);
+			}
 		} // if
 
 		else
 		{
-			head = new ListNode(word, head); //hit
+
+			if (*word < *node->word)
+			{
+				head = new ListNode(word, head); //hit
+			} // if
+
+			else
+			{
+				head->next = new ListNode(word, NULL);
+			} // else
 		} //else
 	} // if
 	else
@@ -125,6 +134,7 @@ istream& operator>> (istream &is, Memory &memory)
 			*instruction = line;
 			memory.insert(instruction);
 			c_address += 4;
+			
 		} // if not directive, nor main:
 	}  // while more in file
 	
