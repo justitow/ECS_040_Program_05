@@ -13,7 +13,7 @@ instruction2.o : instruction2.cpp instruction2.h
 labels.o : labels.cpp labels.h instruction2.h
 	g++ -ansi -Wall -g -c labels.cpp
 
-main.o : main.cpp registers.h decoder.h reader.h instruction.h labels.h data.h memory.h
+main.o : main.cpp registers.h decoder.h instruction.h labels.h data.h memory.h
 	g++ -ansi -Wall -g -c main.cpp
 
 registers.o : registers.cpp registers.h 
