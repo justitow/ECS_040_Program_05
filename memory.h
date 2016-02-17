@@ -10,6 +10,7 @@
 #define memory_h
 
 #include <iostream>
+#include <cstring>
 
 #include "word.h"
 #include "data.h"
