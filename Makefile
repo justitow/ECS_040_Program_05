@@ -8,7 +8,7 @@ instruction.o : instruction.cpp instruction.h
 	g++ -ansi -Wall -g -c instruction.cpp
 
 instruction2.o : instruction2.cpp instruction2.h
-g++ -ansi -Wall -g -c instruction2.cpp
+	g++ -ansi -Wall -g -c instruction2.cpp
 
 labels.o : labels.cpp labels.h instruction2.h
 	g++ -ansi -Wall -g -c labels.cpp

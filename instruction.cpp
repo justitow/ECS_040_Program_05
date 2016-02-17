@@ -5,7 +5,7 @@
 
 
 
-Instruction::Instruction(int adr) : info(NULL), Word(adr)
+Instruction::Instruction(int adr) : Word(adr), info(NULL)
 {
 }  // Instruction()
 
