@@ -19,31 +19,31 @@ Instruction2::Instruction2() : info(NULL)
 
 Instruction2::~Instruction2()
 {
-	if(info)
-		delete [] info;
+  if(info)
+    delete [] info;
 }  // ~Instruction2
 
 
 int Instruction2::getAddress() const
 {
-	return address;
+  return address;
 } // get()
 
 
 const char* Instruction2::getInfo() const
 {
-	return info;
+  return info;
 } // get()
 
 
 void Instruction2::setAddress(int addr)
 {
-	address = addr;
+  address = addr;
 } // setAddress()
 
 
 void Instruction2::setInfo(const char* information)
 {
-	info = new char[strlen(information) + 1];
-	strcpy(info, information);
+  info = new char[strlen(information) + 1];
+  strcpy(info, information);
 } // setInfo()

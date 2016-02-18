@@ -11,22 +11,22 @@ using namespace std;
 
 Word::Word(int myAdr) : address(myAdr)
 {
-	
+
 }
 
 Word::~Word()
 {
-	
+
 }
 
 bool operator<(const Word& l, const Word& r)
 {
-	if (l.address < r.address)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+  if (l.address < r.address)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }

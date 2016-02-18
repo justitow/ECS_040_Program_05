@@ -10,21 +10,21 @@
 
 Data::Data(int adr) : Word(adr)
 {
-	
+  
 }
 
 int& Data::get()
 {
-	return num;
+  return num;
 }
 
 int Data::get() const
 {
-	return num;
+  return num;
 }
 
 int& Data::operator=(int newInt)
 {
-	num = newInt;
-	return num;
+  num = newInt;
+  return num;
 }

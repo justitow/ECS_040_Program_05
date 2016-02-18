@@ -16,12 +16,12 @@
 class Data : public Word
 {
 private:
-	int num;
+  int num;
 public:
-	Data(int);
-	int get() const;
+  Data(int);
+  int get() const;
   int& get ();
-	int& operator=(int);
+  int& operator=(int);
 };
 
-#endif 
+#endif

@@ -1,5 +1,5 @@
 #ifndef INSTRUCTION_H
-#define	INSTRUCTION_H
+#define  INSTRUCTION_H
 // Author: Sean Davis
 
 #include "word.h"
@@ -12,9 +12,8 @@ public:
   virtual ~Instruction();
   const char* getInfo() const;
   char operator=(const char* information);
-	friend std::ostream& operator<<(std::ostream&, const Instruction&);
-  
+  friend std::ostream& operator<<(std::ostream&, const Instruction&);
+
 }; //class Instruction
 
-#endif	// INSTRUCTION_H 
-
+#endif  // INSTRUCTION_H

@@ -12,126 +12,124 @@
 
 ListNode::ListNode(Word* myword, ListNode* listnode)
 {
-	word = myword;
-	next = listnode;
+  word = myword;
+  next = listnode;
 }
 
 ListNode::~ListNode()
 {
-	delete word;
+  delete word;
 }
 
 Memory::Memory() : head(NULL)
 {
-	
+
 }
 
 Memory::~Memory()
 {
-	ListNode* ptr = head;
-	ListNode* prev = NULL;
-	while (ptr->next != NULL)
-	{
-		prev = ptr;
-		ptr = ptr->next;
-		delete prev;
-	}
+  ListNode* ptr = head;
+  ListNode* prev = NULL;
+  while (ptr->next != NULL)
+  {
+    prev = ptr;
+    ptr = ptr->next;
+    delete prev;
+  }
 }
 
 Word& Memory::operator[](int adr)
 {
-	
-	ListNode* node = head;
-	Word* word = new Word(adr);
-	while (node != NULL && *node->word < *word)
-	{
-		node = node->next;
-	} //while
-	
-	if (node != NULL && !(*word < *node->word))
-	{
-		return *node->word;
-	}// if not equal
-	
-	else
-	{
-		Data* data = new Data(adr);
-		insert(data);
-		return *data;
-	} // else
-	}// operator[]
+
+  ListNode* node = head;
+  Word* word = new Word(adr);
+  while (node != NULL && *node->word < *word)
+  {
+    node = node->next;
+  } //while
+
+  if (node != NULL && !(*word < *node->word))
+  {
+    return *node->word;
+  }// if not equal
+
+  else
+  {
+    Data* data = new Data(adr);
+    insert(data);
+    return *data;
+  } // else
+  }// operator[]
 
 Word& Memory::operator[](const int adr) const
 {
-	ListNode* node = head;
-	Word* word = new Word(adr);
-	while (node != NULL && *node->word < *word)
-	{
-		node = node->next;
-	} //while
-	
-	if (node != NULL && !(*word < *node->word))
-	{
-		return *node->word;
-	}// if not equal
-	
-	else
-	{
-		//cout << "ya dun goofed";
-		return *node->word;
-	} // else
+  ListNode* node = head;
+  Word* word = new Word(adr);
+  while (node != NULL && *node->word < *word)
+  {
+    node = node->next;
+  } //while
+
+  if (node != NULL && !(*word < *node->word))
+  {
+    return *node->word;
+  }// if not equal
+
+  else
+  {
+    //cout << "ya dun goofed";
+    return *node->word;
+  } // else
 
 }// operator[]
 
 void Memory::insert(Word* word)
 {
 
-	ListNode *ptr, *prev = NULL;
-		
-	for (ptr = head; ptr && (*ptr->word < *word); ptr = ptr->next)
-	{
-		prev = ptr;
-		
-	} // for
-	
-	if(prev)
-		prev->next = new ListNode(word, ptr);
-			else
-				head = new ListNode(word, ptr);
-	
+  ListNode *ptr, *prev = NULL;
+
+  for (ptr = head; ptr && (*ptr->word < *word); ptr = ptr->next)
+  {
+    prev = ptr;
+
+  } // for
+
+  if(prev)
+    prev->next = new ListNode(word, ptr);
+      else
+        head = new ListNode(word, ptr);
+
 } //insert()
 
 const Instruction& Memory::fetch(Registers *registers) const
 {
-	Instruction& instruction = dynamic_cast<Instruction&>((*this)[registers->get(Registers::eip)]);
-	registers->set(Registers::eip, registers->get(Registers::eip) + 4);
-	return instruction;
+  Instruction& instruction = dynamic_cast<Instruction&>((*this)[registers->get(Registers::eip)]);
+  registers->set(Registers::eip, registers->get(Registers::eip) + 4);
+  return instruction;
 } // fetch()
 
 istream& operator>> (istream &is, Memory &memory)
 {
-	char line[256], *ptr;
-	int c_address = 100;
-	
-	while(is.getline(line, 256))
-	{
-		for(ptr = strchr(line, '\t'); ptr; ptr = strchr(line, '\t'))
-			*ptr = ' ';  // replace all tabs with space characters
-		
-		for(ptr = line; *ptr == ' '; ptr++);  // get past leading spaces
-		
-		if(*ptr != '.' && *ptr != '_' && !strstr(line, "main:") &&
-			 !strchr(line, ':'))
-		{
-			Instruction* instruction = new Instruction(c_address);
-			*instruction = line;
-			memory.insert(instruction);
-			c_address += 4;
-			
-		} // if not directive, nor main:
-	}  // while more in file
-	
-	return is;
+  char line[256], *ptr;
+  int c_address = 100;
+
+  while(is.getline(line, 256))
+  {
+    for(ptr = strchr(line, '\t'); ptr; ptr = strchr(line, '\t'))
+      *ptr = ' ';  // replace all tabs with space characters
+
+    for(ptr = line; *ptr == ' '; ptr++);  // get past leading spaces
+
+    if(*ptr != '.' && *ptr != '_' && !strstr(line, "main:") &&
+       !strchr(line, ':'))
+    {
+      Instruction* instruction = new Instruction(c_address);
+      *instruction = line;
+      memory.insert(instruction);
+      c_address += 4;
+
+    } // if not directive, nor main:
+  }  // while more in file
+
+  return is;
 }  // operator>>
-
-

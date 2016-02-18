@@ -23,8 +23,8 @@ void Decoder::andl(Registers *registers)
 
 void Decoder::call(Registers *registers, Memory& memory) const
 {
-	Data &data = dynamic_cast <Data&> (memory[*registers += -4]);
-	data.get() = registers->get(Registers::eip);
+  Data &data = dynamic_cast <Data&> (memory[*registers += -4]);
+  data.get() = registers->get(Registers::eip);
   registers->set(Registers::eip, *operand1);
 } // call()
 
@@ -36,27 +36,27 @@ void Decoder::cmpl(Registers *registers) const
 
 void Decoder::decl(Registers *registers)
 {
-	*operand1 -= 1;
-	registers->setFlags(*operand1);
+  *operand1 -= 1;
+  registers->setFlags(*operand1);
 }
 
 void Decoder::execute(const Instruction &instruction,
                       Registers *registers, Memory& memory,
-											const Labels& labels)
+                      const Labels& labels)
 {
   const char *opcodes[] = { "addl", "andl", "leave", "movl", "pushl", "ret",
     "subl", "cmpl", "incl", "jg", "jle", "jmp", "leal", "call", "sall", "decl",
-		"imull" };
-  enum OpcodeNum 
+    "imull" };
+  enum OpcodeNum
     {ADDL, ANDL, LEAVE, MOVL, PUSHL, RET, SUBL, CMPL, INCL, JG,
       JLE, JMP, LEAL, CALL, SALL, DECL, IMULL
     };  // enum OpcodeNum
   int opcodeNum;
-  
-  for(opcodeNum = ADDL; 
+
+  for(opcodeNum = ADDL;
     strcmp(opcode, opcodes[opcodeNum]) != 0 || opcodeNum > IMULL;
     ++opcodeNum);
-  
+
   switch (opcodeNum)
   {
     case ADDL: addl(registers); break;
@@ -74,17 +74,17 @@ void Decoder::execute(const Instruction &instruction,
     case LEAL: leal(&instruction, registers, labels); break;
     case CALL: call(registers, memory); break;
     case SALL: sall(registers); break;
-		case IMULL: imull(registers); break;
-		case DECL: decl(registers); break;
+    case IMULL: imull(registers); break;
+    case DECL: decl(registers); break;
     default: cout << "Invalid opcode!\n";
   } // switch on oncodeNum
- 
+
 }  // execute()
 
 void Decoder::imull(Registers *registers)
 {
-	*operand2 = *operand1 * *operand2;
-	registers->setFlags(*operand2);
+  *operand2 = *operand1 * *operand2;
+  registers->setFlags(*operand2);
 } // imull
 
 
@@ -115,22 +115,22 @@ void Decoder::jmp(Registers *registers) const
 
 
 void Decoder::leal(const Instruction *instruction, const Registers *registers,
-									 const Labels& labels)
+                   const Labels& labels)
 {
   char *ptr, info[1000];
-	int regNum;
+  int regNum;
   strcpy(info, instruction->getInfo());
   strtok(info, " ");  // get past leal
   ptr = strtok(NULL, " ");
-	regNum = registers->stringToRegNum(ptr);
-	*operand2 = atoi(ptr) + registers->get((Registers::RegName)regNum);
+  regNum = registers->stringToRegNum(ptr);
+  *operand2 = atoi(ptr) + registers->get((Registers::RegName)regNum);
 }  // leal()
 
 
 void Decoder::leave(Registers *registers, const Memory& memory) const
 {
-	registers->set(Registers::esp, registers->get(Registers::ebp));
-	Data &data = dynamic_cast <Data&> (memory[registers->get(Registers::esp)]);
+  registers->set(Registers::esp, registers->get(Registers::ebp));
+  Data &data = dynamic_cast <Data&> (memory[registers->get(Registers::esp)]);
   registers->set(Registers::ebp, data.get());
   registers->set(Registers::esp, registers->get(Registers::esp) + 4);
 }  // leave()
@@ -146,7 +146,7 @@ void Decoder::parse(const Instruction &instruction, Registers *registers,
                     Memory& memory, const Labels &labels)
 {
   char *ptr, info[1000];
-  
+
   strcpy(info, instruction.getInfo());
   strcpy(opcode, strtok(info, " "));
   ptr = strtok(NULL, " ");
@@ -154,7 +154,7 @@ void Decoder::parse(const Instruction &instruction, Registers *registers,
   {
     operand1 = registers->address(ptr, memory, labels);
     ptr = strtok(NULL, " ");
-    
+
     if(ptr)
       operand2 = registers->address(ptr, memory, labels);
   } // if there is at least one operand
@@ -166,9 +166,9 @@ void Decoder::parse(const Instruction &instruction, Registers *registers,
 
 void Decoder::pushl(Registers *registers, Memory& memory) const
 {
-	Data &data = dynamic_cast <Data&> (memory[*registers += -4]);
-	
-	data.get() = *operand1;
+  Data &data = dynamic_cast <Data&> (memory[*registers += -4]);
+
+  data.get() = *operand1;
 }  // pushl()
 
 
@@ -177,10 +177,10 @@ void Decoder::pushl(Registers *registers, Memory& memory) const
 void Decoder::ret(Registers *registers, const Memory& memory) const
 {
 
-	Data &data = dynamic_cast <Data&> (memory[registers->get(Registers::esp)]);
+  Data &data = dynamic_cast <Data&> (memory[registers->get(Registers::esp)]);
 
   registers->set(Registers::eip, data.get());
-	*registers += 4;
+  *registers += 4;
 
 }  // ret()
 

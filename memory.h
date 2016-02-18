@@ -25,31 +25,31 @@ class ListNode
 {
   friend class Memory;
 private:
-	ListNode* next;
-	Word* word;
+  ListNode* next;
+  Word* word;
 public:
-	ListNode(Word* word, ListNode* listnode);
-	~ListNode();
+  ListNode(Word* word, ListNode* listnode);
+  ~ListNode();
 
-	
+
 };
 
 
 class Memory
 {
 private:
-	ListNode* head;
+  ListNode* head;
 public:
-	Memory();
-	~Memory();
-	void insert(Word* word);
+  Memory();
+  ~Memory();
+  void insert(Word* word);
   Word& operator[](const int adr);
   Word& operator[](const int adr) const;
-	const Instruction& fetch(Registers *registers) const;
-	friend istream& operator>> (istream &is, Memory &memory);
+  const Instruction& fetch(Registers *registers) const;
+  friend istream& operator>> (istream &is, Memory &memory);
 }; // Class Memory
 
 
 
 
-#endif 
+#endif

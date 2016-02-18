@@ -13,13 +13,13 @@
 
 class Word
 {
-	
+
 private:
-	int address;
+  int address;
 public:
-	Word(int);
-	virtual ~Word();
-	friend bool operator<(const Word& L, const Word& R);
+  Word(int);
+  virtual ~Word();
+  friend bool operator<(const Word& L, const Word& R);
 }; // class Word
 
-#endif 
+#endif

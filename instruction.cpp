@@ -16,7 +16,7 @@ Instruction::~Instruction()
   if(info)
     delete [] info;
 }  // ~Instruction
-  
+
 
 
 const char* Instruction::getInfo() const
@@ -29,18 +29,16 @@ const char* Instruction::getInfo() const
 char Instruction::operator=(const char* information)
 {
   info = new char[strlen(information) + 1];
-	if (information[0] == ' ')
-	{
-		information++;
-	}
+  if (information[0] == ' ')
+  {
+    information++;
+  }
   strcpy(info, information);
-	return *info;
+  return *info;
 } // setInfo()
 
 ostream& operator<<(ostream& output, const Instruction& instruction)
 {
-	output << instruction.info;
-	return output;
+  output << instruction.info;
+  return output;
 }
-
-
