@@ -36,7 +36,10 @@ Memory::~Memory()
 	{
 		node = node->next;
 		ListNode* prev = node;
-		delete prev;
+		if (prev)
+		{
+			delete prev;
+		}
 	}
 }
 
