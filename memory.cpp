@@ -10,7 +10,7 @@
 #include "registers.h"
 
 
-ListNode::ListNode(Word* myword, ListNode* listnode)
+ListNode::ListNode(Word* myword, ListNode* listnode = NULL)
 {
 	word = myword;
 	next = listnode;
@@ -83,9 +83,12 @@ void Memory::insert(Word* word)
 
 	ListNode *ptr, *prev = NULL;
 		
-	for (ptr = head; ptr && *ptr->word < *word; ptr = ptr->next)
+	for (ptr = head; ptr && (*ptr->word < *word); ptr = ptr->next)
+	{
 		prev = ptr;
 		
+	}
+	
 	if(prev)
 		prev->next = new ListNode(word, ptr);
 			else
