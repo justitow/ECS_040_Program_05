@@ -18,7 +18,7 @@ class Data : public Word
 private:
 	int num;
 public:
-	Data(int myAdr);
+	Data(int);
 	int& get();
 	int get() const;
 	int& operator=(int newNum);

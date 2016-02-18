@@ -40,26 +40,6 @@ Memory::~Memory()
 
 Word& Memory::operator[](int adr)
 {
-	/*
-	ListNode* node = head;
-	
-	if (node->word != NULL)
-	{
-		while ((node != NULL) && (*node->word < *word))
-		{
-			node = node->next;
-		} //while
-
-		if (!(*word < *node->word))
-		{
-			return *node->word;
-		}// if not equal
-	}
-
-	Data* data = new Data(adr);
-	insert(data);
-	return *data;
-	*/
 	
 	ListNode* node = head;
 	ListNode* prev = NULL;
