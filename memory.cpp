@@ -105,7 +105,7 @@ void Memory::insert(Word* word)
 const Instruction& Memory::fetch(Registers *registers) const
 {
   Instruction& instruction =
-	dynamic_cast<Instruction&>((*this)[registers->get(Registers::eip)]);
+  dynamic_cast<Instruction&>((*this)[registers->get(Registers::eip)]);
   registers->set(Registers::eip, registers->get(Registers::eip) + 4);
   return instruction;
 } // fetch()
