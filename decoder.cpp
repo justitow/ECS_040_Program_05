@@ -177,8 +177,10 @@ void Decoder::ret(Registers *registers, const Memory& memory) const
 {
 
 	Data &data = dynamic_cast <Data&> (memory[registers->get(Registers::esp)]);
+
   registers->set(Registers::eip, data.get());
-  *registers += 4;
+	*registers += 4;
+
 }  // ret()
 
 

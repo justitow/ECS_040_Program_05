@@ -61,18 +61,19 @@ Word& Memory::operator[](int adr)
 	return *data;
 	*/
 	
-	ListNode *ptr, *prev = NULL;
+	ListNode* node = head;
+	ListNode* prev = NULL;
 	Word* word = new Word(adr);
-	
-	for (ptr = head; ptr && (*ptr->word < *word); ptr = ptr->next)
+	while (node != NULL && *node->word < *word)
 	{
-		prev = ptr;
-	}
+		prev = node;
+		node = node->next;
+	} //while
 	
-	if ((ptr != NULL) && (*word < *ptr->word))
+	if (node != NULL && !(*word < *node->word))
 	{
-		return *ptr->word;
-	}
+		return *node->word;
+	}// if not equal
 	
 	
 	else
@@ -87,12 +88,12 @@ Word& Memory::operator[](const int adr) const
 {
 	ListNode* node = head;
 	Word* word = new Word(adr);
-	while (*node->word < *word)
+	while (node != NULL && *node->word < *word)
 	{
 		node = node->next;
 	} //while
 	
-	if (!(*word < *node->word))
+	if (node != NULL && !(*word < *node->word))
 	{
 		return *node->word;
 	}// if not equal
