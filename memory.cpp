@@ -52,18 +52,18 @@ Word& Memory::operator[](int adr)
 	
 	if (node != NULL && !(*word < *node->word))
 	{
+		prev = NULL;
 		return *node->word;
 	}// if not equal
 	
 	else
 	{
+		prev = NULL;
 		Data* data = new Data(adr);
 		insert(data);
 		return *data;
 	}
-	
-	prev = NULL;
-}// operator[]
+	}// operator[]
 
 Word& Memory::operator[](const int adr) const
 {
