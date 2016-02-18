@@ -115,11 +115,10 @@ void Decoder::jmp(Registers *registers) const
 
 void Decoder::leal(const Instruction *instruction, const Registers *registers)
 {
-  char *ptr, info[1000], *otherPtr;
+  char *ptr, info[1000];
 	int regNum;
   strcpy(info, instruction->getInfo());
   strtok(info, " ");  // get past leal
-	otherPtr = strchr(info, ',');
   ptr = strtok(NULL, " ");
 	regNum = registers->stringToRegNum(ptr);
 	*operand2 = atoi(ptr) + registers->get((Registers::RegName)regNum);

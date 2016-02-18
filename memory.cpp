@@ -42,7 +42,6 @@ Word& Memory::operator[](int adr)
 {
 	
 	ListNode* node = head;
-	ListNode* prev = NULL;
 	Word* word = new Word(adr);
 	while (node != NULL && *node->word < *word)
 	{
