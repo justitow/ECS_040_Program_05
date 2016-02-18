@@ -55,13 +55,14 @@ Word& Memory::operator[](int adr)
 		return *node->word;
 	}// if not equal
 	
-	
 	else
 	{
 		Data* data = new Data(adr);
 		insert(data);
 		return *data;
 	}
+	
+	prev = NULL;
 }// operator[]
 
 Word& Memory::operator[](const int adr) const

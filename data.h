@@ -21,7 +21,7 @@ public:
 	Data(int);
 	int& get();
 	int get() const;
-	int& operator=(int newNum);
+	int& operator=(int);
 };
 
 #endif 
