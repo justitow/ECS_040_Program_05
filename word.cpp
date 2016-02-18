@@ -25,7 +25,7 @@ bool operator<(const Word& l, const Word& r)
   {
     return true;
   } // if
-  else
+  else // I am an else!
   {
     return false;
   } // else

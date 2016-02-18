@@ -54,7 +54,7 @@ Word& Memory::operator[](int adr)
     return *node->word;
   }// if not equal
 
-  else
+  else // this happened
   {
     Data* data = new Data(adr);
     insert(data);
@@ -76,7 +76,7 @@ Word& Memory::operator[](const int adr) const
     return *node->word;
   }// if not equal
 
-  else
+  else // its not good
   {
     //cout << "ya dun goofed";
     return *node->word;
@@ -97,14 +97,15 @@ void Memory::insert(Word* word)
 
   if(prev)
     prev->next = new ListNode(word, ptr);
-      else
+      else // this happened?
         head = new ListNode(word, ptr);
 
 } //insert()
 
 const Instruction& Memory::fetch(Registers *registers) const
 {
-  Instruction& instruction = dynamic_cast<Instruction&>((*this)[registers->get(Registers::eip)]);
+  Instruction& instruction =
+	dynamic_cast<Instruction&>((*this)[registers->get(Registers::eip)]);
   registers->set(Registers::eip, registers->get(Registers::eip) + 4);
   return instruction;
 } // fetch()

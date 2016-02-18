@@ -43,7 +43,7 @@ istream& operator>> (istream &is, Labels &labels)
     for(ptr = line; *ptr == ' '; ptr++);  // get past leading spaces
 
     if(*ptr == '.' || *ptr == '_' || (strchr(ptr, ':') &&
-                                      !strstr(ptr, "main:")))
+       !strstr(ptr, "main:")))
     {
       if(strchr(ptr, ':'))
       {

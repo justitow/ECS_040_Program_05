@@ -29,10 +29,12 @@ const char* Instruction::getInfo() const
 char Instruction::operator=(const char* information)
 {
   info = new char[strlen(information) + 1];
+
   if (information[0] == ' ')
   {
     information++;
-  } // if
+  } // statement
+
   strcpy(info, information);
   return *info;
 } // setInfo()

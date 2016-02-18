@@ -150,6 +150,7 @@ void Decoder::parse(const Instruction &instruction, Registers *registers,
   strcpy(info, instruction.getInfo());
   strcpy(opcode, strtok(info, " "));
   ptr = strtok(NULL, " ");
+
   if(ptr)
   {
     operand1 = registers->address(ptr, memory, labels);
