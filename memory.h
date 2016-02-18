@@ -43,8 +43,8 @@ public:
 	Memory();
 	~Memory();
 	void insert(Word* word);
-	Word& operator[](const int adr);
-	Word& operator[](const int adr) const;
+  Word& operator[](const int adr);
+  Word& operator[](const int adr) const;
 	const Instruction& fetch(Registers *registers) const;
 	friend istream& operator>> (istream &is, Memory &memory);
 };
