@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Instruction::Instruction(int adr) : Word(adr), info(NULL)
+Instruction::Instruction(const int adr) : Word(adr), info(NULL)
 {
 }  // Instruction()
 

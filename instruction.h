@@ -8,7 +8,7 @@ class Instruction : public Word
 {
   char *info;
 public:
-  Instruction(int adr);
+  Instruction(const int adr);
   virtual ~Instruction();
   const char* getInfo() const;
   char operator=(const char* information);

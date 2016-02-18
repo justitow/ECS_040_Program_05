@@ -19,8 +19,8 @@ private:
 	int num;
 public:
 	Data(int);
-	int& get();
 	int get() const;
+	int& get();
 	int& operator=(int);
 };
 
