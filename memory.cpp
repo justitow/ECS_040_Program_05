@@ -58,7 +58,7 @@ Word& Memory::operator[](int adr)
 		Data* data = new Data(adr);
 		insert(data);
 		return *data;
-	}
+	} // else
 	}// operator[]
 
 Word& Memory::operator[](const int adr) const
@@ -92,7 +92,7 @@ void Memory::insert(Word* word)
 	{
 		prev = ptr;
 		
-	}
+	} // for
 	
 	if(prev)
 		prev->next = new ListNode(word, ptr);

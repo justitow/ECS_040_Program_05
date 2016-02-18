@@ -23,7 +23,7 @@ class Registers;
 
 class ListNode
 {
-	friend class Memory;
+  friend class Memory;
 private:
 	ListNode* next;
 	Word* word;
@@ -47,7 +47,7 @@ public:
   Word& operator[](const int adr) const;
 	const Instruction& fetch(Registers *registers) const;
 	friend istream& operator>> (istream &is, Memory &memory);
-};
+}; // Class Memory
 
 
 
