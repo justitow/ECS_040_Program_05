@@ -10,12 +10,12 @@ using namespace std;
  
 class Registers 
 {
-  int regs[6];
-  int stringToRegNum(const char *regString) const;
+  int regs[8];
   static const int ZF = 0x40;
   static const int SF = 0x80;
 public:
-  typedef enum {eax, ebp, esp, eip, edx, flags} RegName;
+	int stringToRegNum(const char *regString) const;
+  typedef enum {eax, ebp, esp, eip, edx, ebx, ecx, flags} RegName;
   Registers(); 
   int* address(char *ptr, Memory &memory, const Labels &labels);
   int get(Registers::RegName regName) const;

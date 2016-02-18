@@ -40,8 +40,8 @@ Memory::~Memory()
 
 Word& Memory::operator[](int adr)
 {
+	/*
 	ListNode* node = head;
-	Word* word = new Word(adr);
 	
 	if (node->word != NULL)
 	{
@@ -59,7 +59,28 @@ Word& Memory::operator[](int adr)
 	Data* data = new Data(adr);
 	insert(data);
 	return *data;
+	*/
 	
+	ListNode *ptr, *prev = NULL;
+	Word* word = new Word(adr);
+	
+	for (ptr = head; ptr && (*ptr->word < *word); ptr = ptr->next)
+	{
+		prev = ptr;
+	}
+	
+	if ((ptr != NULL) && (*word < *ptr->word))
+	{
+		return *ptr->word;
+	}
+	
+	
+	else
+	{
+		Data* data = new Data(adr);
+		insert(data);
+		return *data;
+	}
 }// operator[]
 
 Word& Memory::operator[](const int adr) const
@@ -121,7 +142,8 @@ istream& operator>> (istream &is, Memory &memory)
 		
 		for(ptr = line; *ptr == ' '; ptr++);  // get past leading spaces
 		
-		if(*ptr != '.' && *ptr != '_' && !strstr(line, "main:"))
+		if(*ptr != '.' && *ptr != '_' && !strstr(line, "main:") &&
+			 !strchr(line, ':'))
 		{
 			Instruction* instruction = new Instruction(c_address);
 			*instruction = line;

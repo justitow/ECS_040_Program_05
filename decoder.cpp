@@ -25,7 +25,6 @@ void Decoder::call(Registers *registers, Memory& memory) const
 {
 	Data &data = dynamic_cast <Data&> (memory[*registers += -4]);
 	data.get() = registers->get(Registers::eip);
-	
   registers->set(Registers::eip, *operand1);
 } // call()
 
@@ -35,32 +34,40 @@ void Decoder::cmpl(Registers *registers) const
   registers->setFlags(*operand2 - *operand1);
 }  // cmpl()
 
+void Decoder::decl(Registers *registers)
+{
+	*operand1 -= 1;
+	registers->setFlags(*operand1);
+}
 
 void Decoder::execute(const Instruction &instruction,
                       Registers *registers, Memory& memory)
 {
   const char *opcodes[] = { "addl", "andl", "leave", "movl", "pushl", "ret",
-    "subl", "cmpl", "incl", "jg", "jle", "jmp", "leal", "call", "sall"};
+    "subl", "cmpl", "incl", "jg", "jle", "jmp", "leal", "call", "sall", "imull"
+		"decl"};
   enum OpcodeNum 
     {ADDL, ANDL, LEAVE, MOVL, PUSHL, RET, SUBL, CMPL, INCL, JG,
-      JLE, JMP, LEAL, CALL, SALL
+      JLE, JMP, LEAL, CALL, SALL, IMULL, DECL
     };  // enum OpcodeNum
   int opcodeNum;
   
   for(opcodeNum = ADDL; 
-    strcmp(opcode, opcodes[opcodeNum]) != 0 || opcodeNum > SALL;
+    strcmp(opcode, opcodes[opcodeNum]) != 0 || opcodeNum > DECL;
     ++opcodeNum);
   
   switch (opcodeNum)
   {
     case ADDL: addl(registers); break;
     case ANDL: andl(registers); break;
+		case DECL: decl(registers); break;
     case LEAVE: leave(registers, memory); break;
     case MOVL: movl(); break;
     case PUSHL: pushl(registers, memory); break;
     case RET: ret(registers, memory); break;
     case SUBL: subl(registers); break;
     case CMPL: cmpl(registers); break;
+		case IMULL: imull(registers); break;
     case INCL: incl(registers); break;
     case JG: jg(registers); break;
     case JLE:  jle(registers); break;
@@ -72,6 +79,12 @@ void Decoder::execute(const Instruction &instruction,
   } // switch on oncodeNum
  
 }  // execute()
+
+void Decoder::imull(Registers *registers)
+{
+	*operand2 = *operand1 * *operand2;
+	registers->setFlags(*operand2);
+} // imull
 
 
 void Decoder::incl(Registers *registers)
@@ -102,11 +115,14 @@ void Decoder::jmp(Registers *registers) const
 
 void Decoder::leal(const Instruction *instruction, const Registers *registers)
 {
-  char *ptr, info[1000];
+  char *ptr, info[1000], *otherPtr;
+	int regNum;
   strcpy(info, instruction->getInfo());
   strtok(info, " ");  // get past leal
+	otherPtr = strchr(info, ',');
   ptr = strtok(NULL, " ");
-  *operand2 = atoi(ptr) + registers->get(Registers::ebp);
+	regNum = registers->stringToRegNum(ptr);
+	*operand2 = atoi(ptr) + registers->get((Registers::RegName)regNum);
 }  // leal()
 
 

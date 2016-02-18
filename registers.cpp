@@ -13,6 +13,8 @@ Registers::Registers()
   regs[eip] = 100;
   regs[eax] = 0;
   regs[edx] = 0;
+	regs[ebx] = 0;
+	regs[ecx] = 0;
   regs[flags] = 0xC0;
 }  // Registers()
 
@@ -59,7 +61,7 @@ int* Registers::address(char *operand, Memory& memory, const Labels &labels)
 
 int Registers::get(Registers::RegName regName) const
 {
-  if(regName < eax || regName > eip)
+  if(regName < eax || regName > ecx)
     return 0;
   
   return regs[regName];
@@ -91,7 +93,9 @@ ostream& operator<< (ostream &os, const Registers &registers)
     << " eax: " << setw(3) << registers.regs[Registers::eax] 
     << " ebp: " << setw(3) << registers.regs[Registers::ebp] 
     << " esp: " << setw(3) << registers.regs[Registers::esp] 
-    << " edx: " << setw(3) << registers.regs[Registers::edx] 
+    << " edx: " << setw(3) << registers.regs[Registers::edx]
+		<< " ebx: " << setw(3) << registers.regs[Registers::ebx]
+		<< " ecx: " << setw(3) << registers.regs[Registers::ecx]
     << " flags: " << setw(3) << registers.regs[Registers::flags] << endl;
   
   return os;
@@ -132,10 +136,10 @@ int* Registers::scaledIndexMode(char *operand, Memory& memory) const
 
 int Registers::stringToRegNum(const char *regString) const
 {
-  char regNames[4][7] = {"eax", "ebp", "esp", "eip"};
+  char regNames[7][7] = {"eax", "ebp", "esp", "eip", "edx", "ebx", "ecx"};
   int regNum;
   
-  for(regNum = eax; regNum <= eip; regNum++)
+  for(regNum = eax; regNum <= ecx; regNum++)
     if(strstr(regString, regNames[regNum]))
       break;
   
@@ -145,7 +149,7 @@ int Registers::stringToRegNum(const char *regString) const
 
 void Registers::set(Registers::RegName regName, int value)
 {
-  if(regName >= eax && regName <= eip)
+  if(regName >= eax && regName <= ecx)
     regs[regName] = value;
 } // set()
 

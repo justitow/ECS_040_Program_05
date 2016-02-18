@@ -17,6 +17,8 @@ class Decoder
   void andl(Registers *registers);
   void call(Registers *registers, Memory &memory) const;
   void cmpl(Registers *registers) const;
+	void decl(Registers *registers);
+	void imull(Registers *registers);
   void incl(Registers *registers);
   void jg(Registers *registers) const;
   void jle(Registers *registers) const;

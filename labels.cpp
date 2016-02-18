@@ -34,9 +34,10 @@ istream& operator>> (istream &is, Labels &labels)
     
     for(ptr = line; *ptr == ' '; ptr++);  // get past leading spaces
     
-    if(*ptr == '.' || *ptr == '_')
+    if(*ptr == '.' || *ptr == '_' || (strchr(ptr, ':') &&
+																			!strstr(ptr, "main:")))
     {
-      if((ptr[1] == 'L' || *ptr == '_') && strchr(ptr, ':'))
+      if(strchr(ptr, ':'))
       {
         labels.addresses[labels.count].setAddress(address);
         *(strchr(ptr, ':')) = '\0';  // eliminate the colon from the label
