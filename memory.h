@@ -40,6 +40,7 @@ class Memory
 private:
 	ListNode* head;
 public:
+	Memory();
 	~Memory();
 	void insert(Word* word);
 	Word& operator[](const int adr);

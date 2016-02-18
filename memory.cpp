@@ -10,7 +10,7 @@
 #include "registers.h"
 
 
-ListNode::ListNode(Word* myword, ListNode* listnode = NULL)
+ListNode::ListNode(Word* myword, ListNode* listnode)
 {
 	word = myword;
 	next = listnode;
@@ -19,6 +19,11 @@ ListNode::ListNode(Word* myword, ListNode* listnode = NULL)
 ListNode::~ListNode()
 {
 	delete word;
+}
+
+Memory::Memory() : head(NULL)
+{
+	
 }
 
 Memory::~Memory()
