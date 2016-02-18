@@ -8,6 +8,14 @@ Labels::Labels() : count(0)
 {
 } // Labels()
 
+bool Labels::inLabels(const char* label) const
+{
+	for(int i = 0; i < count; i++)
+		if(strcmp(addresses[i].getInfo(), label) == 0)
+			return true;
+	
+	return false;	
+} // find()
 
 int Labels::find(const char* label) const
 {

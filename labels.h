@@ -12,6 +12,7 @@ class Labels
 public:
   Labels();
   int find(const char*) const;
+	bool inLabels(const char* label) const;
   friend istream& operator>> (istream &is, Labels &labels);
 }; // class Labels 
 

@@ -41,40 +41,41 @@ void Decoder::decl(Registers *registers)
 }
 
 void Decoder::execute(const Instruction &instruction,
-                      Registers *registers, Memory& memory)
+                      Registers *registers, Memory& memory,
+											const Labels& labels)
 {
   const char *opcodes[] = { "addl", "andl", "leave", "movl", "pushl", "ret",
-    "subl", "cmpl", "incl", "jg", "jle", "jmp", "leal", "call", "sall", "imull"
-		"decl"};
+    "subl", "cmpl", "incl", "jg", "jle", "jmp", "leal", "call", "sall", "decl",
+		"imull" };
   enum OpcodeNum 
     {ADDL, ANDL, LEAVE, MOVL, PUSHL, RET, SUBL, CMPL, INCL, JG,
-      JLE, JMP, LEAL, CALL, SALL, IMULL, DECL
+      JLE, JMP, LEAL, CALL, SALL, DECL, IMULL
     };  // enum OpcodeNum
   int opcodeNum;
   
   for(opcodeNum = ADDL; 
-    strcmp(opcode, opcodes[opcodeNum]) != 0 || opcodeNum > DECL;
+    strcmp(opcode, opcodes[opcodeNum]) != 0 || opcodeNum > IMULL;
     ++opcodeNum);
   
   switch (opcodeNum)
   {
     case ADDL: addl(registers); break;
     case ANDL: andl(registers); break;
-		case DECL: decl(registers); break;
     case LEAVE: leave(registers, memory); break;
     case MOVL: movl(); break;
     case PUSHL: pushl(registers, memory); break;
     case RET: ret(registers, memory); break;
     case SUBL: subl(registers); break;
     case CMPL: cmpl(registers); break;
-		case IMULL: imull(registers); break;
     case INCL: incl(registers); break;
     case JG: jg(registers); break;
     case JLE:  jle(registers); break;
     case JMP: jmp(registers); break;
-    case LEAL: leal(&instruction, registers); break;
+    case LEAL: leal(&instruction, registers, labels); break;
     case CALL: call(registers, memory); break;
     case SALL: sall(registers); break;
+		case IMULL: imull(registers); break;
+		case DECL: decl(registers); break;
     default: cout << "Invalid opcode!\n";
   } // switch on oncodeNum
  
@@ -113,7 +114,8 @@ void Decoder::jmp(Registers *registers) const
 }  // jmp()
 
 
-void Decoder::leal(const Instruction *instruction, const Registers *registers)
+void Decoder::leal(const Instruction *instruction, const Registers *registers,
+									 const Labels& labels)
 {
   char *ptr, info[1000];
 	int regNum;

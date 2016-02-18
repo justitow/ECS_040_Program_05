@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
   {
 		const Instruction&  instruction = memory.fetch(&registers);
     decoder.parse(instruction, &registers, memory, labels);
-    decoder.execute(instruction, &registers, memory);
+    decoder.execute(instruction, &registers, memory, labels);
     cout << left << setw(20) << instruction << registers;
   } // while eip not zero
   

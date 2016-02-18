@@ -23,7 +23,8 @@ class Decoder
   void jg(Registers *registers) const;
   void jle(Registers *registers) const;
   void jmp(Registers *registers) const;  
-  void leal(const Instruction *instruction, const Registers *registers);
+  void leal(const Instruction *instruction, const Registers *registers,
+						const Labels &labels);
   void leave(Registers *registers, const Memory &memory) const;
   void movl();
   void pushl(Registers *registers, Memory &memory) const;
@@ -32,7 +33,7 @@ class Decoder
   void subl(Registers *registers);
 public:
   void execute(const Instruction &instruction, Registers *registers,
-               Memory &memory);
+               Memory &memory, const Labels &labels);
   void parse(const Instruction &instruction, Registers *registers,
              Memory &memory, const Labels &labels);
 }; // class Decoder;

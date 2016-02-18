@@ -35,7 +35,7 @@ int* Registers::address(char *operand, Memory& memory, const Labels &labels)
     return &value;
   } // if immediate mode
   
-  if(operand[0] == '.' || operand[0] == '_')  // label
+  if(operand[0] == '.' || operand[0] == '_' || labels.inLabels(operand))  // label
   {
     value = labels.find(operand);
     return &value;
