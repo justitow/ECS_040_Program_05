@@ -20,7 +20,7 @@ private:
 public:
 	Data(int);
 	int get() const;
-	^ int& get ();
+  int& get ();
 	int& operator=(int);
 };
 
