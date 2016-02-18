@@ -127,8 +127,8 @@ void Decoder::leal(const Instruction *instruction, const Registers *registers)
 
 void Decoder::leave(Registers *registers, const Memory& memory) const
 {
+	registers->set(Registers::esp, registers->get(Registers::ebp));
 	Data &data = dynamic_cast <Data&> (memory[registers->get(Registers::esp)]);
-  registers->set(Registers::esp, registers->get(Registers::ebp));
   registers->set(Registers::ebp, data.get());
   registers->set(Registers::esp, registers->get(Registers::esp) + 4);
 }  // leave()
