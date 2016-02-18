@@ -18,7 +18,8 @@ ListNode::ListNode(Word* myword, ListNode* listnode)
 
 ListNode::~ListNode()
 {
-	delete word;
+	if (word  != NULL)
+		delete word;
 }
 
 Memory::Memory() : head(NULL)
