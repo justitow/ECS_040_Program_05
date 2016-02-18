@@ -31,8 +31,7 @@ public:
   ListNode(Word* word, ListNode* listnode);
   ~ListNode();
 
-
-};
+}; // Class ListNode
 
 
 class Memory

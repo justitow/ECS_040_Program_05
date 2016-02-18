@@ -11,20 +11,20 @@
 Data::Data(int adr) : Word(adr)
 {
   
-}
+} // constructor
 
 int& Data::get()
 {
   return num;
-}
+} // get
 
 int Data::get() const
 {
   return num;
-}
+} // other get
 
 int& Data::operator=(int newInt)
 {
   num = newInt;
   return num;
-}
+} // operator= 

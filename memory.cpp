@@ -14,29 +14,30 @@ ListNode::ListNode(Word* myword, ListNode* listnode)
 {
   word = myword;
   next = listnode;
-}
+} // constructor
 
 ListNode::~ListNode()
 {
   delete word;
-}
+} // destructor
 
 Memory::Memory() : head(NULL)
 {
 
-}
+} // constructor
 
 Memory::~Memory()
 {
   ListNode* ptr = head;
   ListNode* prev = NULL;
+
   while (ptr->next != NULL)
   {
     prev = ptr;
     ptr = ptr->next;
     delete prev;
-  }
-}
+  } // while
+} // destructor
 
 Word& Memory::operator[](int adr)
 {

@@ -38,7 +38,7 @@ void Decoder::decl(Registers *registers)
 {
   *operand1 -= 1;
   registers->setFlags(*operand1);
-}
+} // decl()
 
 void Decoder::execute(const Instruction &instruction,
                       Registers *registers, Memory& memory,
@@ -46,7 +46,7 @@ void Decoder::execute(const Instruction &instruction,
 {
   const char *opcodes[] = { "addl", "andl", "leave", "movl", "pushl", "ret",
     "subl", "cmpl", "incl", "jg", "jle", "jmp", "leal", "call", "sall", "decl",
-    "imull" };
+    "imull" }; // opcodes
   enum OpcodeNum
     {ADDL, ANDL, LEAVE, MOVL, PUSHL, RET, SUBL, CMPL, INCL, JG,
       JLE, JMP, LEAL, CALL, SALL, DECL, IMULL

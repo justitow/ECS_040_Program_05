@@ -32,7 +32,7 @@ char Instruction::operator=(const char* information)
   if (information[0] == ' ')
   {
     information++;
-  }
+  } // if
   strcpy(info, information);
   return *info;
 } // setInfo()
@@ -41,4 +41,4 @@ ostream& operator<<(ostream& output, const Instruction& instruction)
 {
   output << instruction.info;
   return output;
-}
+} // ostream << 

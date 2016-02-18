@@ -12,21 +12,21 @@ using namespace std;
 Word::Word(int myAdr) : address(myAdr)
 {
 
-}
+} // constructor
 
 Word::~Word()
 {
 
-}
+} // destructor
 
 bool operator<(const Word& l, const Word& r)
 {
   if (l.address < r.address)
   {
     return true;
-  }
+  } // if
   else
   {
     return false;
-  }
-}
+  } // else
+} // operator<

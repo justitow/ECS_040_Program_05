@@ -22,6 +22,6 @@ public:
   int get() const;
   int& get ();
   int& operator=(int);
-};
+}; // Class Data
 
 #endif

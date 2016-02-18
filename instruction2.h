@@ -21,6 +21,6 @@ public:
   void setAddress(int addr);
   void setInfo(const char* information);
 
-}; //class Instruction
+}; //class Instruction2
 
 #endif
